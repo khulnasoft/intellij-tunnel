@@ -1,0 +1,51 @@
+<idea-plugin>
+    <id>com.khulnasoft.plugins.intellij-Tunnel</id>
+    <name>Tunnel Findings Explorer</name>
+    <vendor email="info@khulnasoft.com" url="https://khulnasoft.github.io/tunnel">Khulnasoft Security</vendor>
+    <idea-version since-build="203.*"/>
+
+    <description><![CDATA[Tunnel integration for Jetbrains tools.<br />
+Scan your project for package vulnerabilities and infrastructure as code misconfigurations using Tunnel.<br />
+Navigate your Tunnel results in the Findings Explorer with additional information in the Help Pane about how to resolve.
+    ]]></description>
+    <change-notes><![CDATA[v1.5.0 - Add support for remote server url to connect <br />
+v1.4.1 - Gracefully handle virtual errors, files in tarballs<br />
+v1.4.0 - Add support for secrets, fix links<br />
+v1.3.1 - Fix issue where results with no line number don't open<br />
+v1.3.0 - Support changes to the Tunnel output with backward compatibility<br />
+v1.2.2 - Handling unexpected fields in the results better<br />
+v1.2.1 - Support more platform version<br />
+v1.2.0 - Add settings for offline scan and ignoring unfixed<br />
+v1.1.0 - Add settings to specify the required severities<br />
+v1.0.3 - Fix support for higher versions of IDE<br/>
+v1.0.2 - Fix background for tree node cells<br/>
+v1.0.1 - Fix bug where no results are found <br />
+v1.0.0 - Initial release <br />]]>
+    </change-notes>
+    <depends>com.intellij.modules.platform</depends>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <toolWindow id="Tunnel Findings" secondary="true" icon="com.khulnasoft.plugins.tunnel.icons.TunnelIcons.Tunnel"
+                    anchor="left"
+                    factoryClass="com.khulnasoft.plugins.tunnel.ui.TunnelWindowFactory"/>
+        <notificationGroup id="Tunnel Notifications" displayType="BALLOON"/>
+        <applicationConfigurable parentId="tools"
+                                 instance="com.khulnasoft.plugins.tunnel.settings.TunnelSettingsConfigurable"
+                                 id="com.khulnasoft.plugins.tunnel.settings.TunnelSettingsConfigurable"
+                                 displayName="Tunnel: Settings"/>
+        <applicationService serviceImplementation="com.khulnasoft.plugins.tunnel.settings.TunnelSettingState"/>
+    </extensions>
+
+    <actions>
+        <action id="com.khulnasoft.plugins.tunnel.actions.RunScannerAction" icon="AllIcons.Debugger.ThreadRunning"
+                class="com.khulnasoft.plugins.tunnel.actions.RunScannerAction" text="Run Tunnel"
+                description="Run tunnel now to update results"/>
+        <action id="com.khulnasoft.plugins.tunnel.actions.ClearResultsAction"
+                icon="AllIcons.Welcome.Project.Remove"
+                class="com.khulnasoft.plugins.tunnel.actions.ClearResultsAction" text="Clear Results"
+                description="Clear results window"/>
+        <action id="com.khulnasoft.plugins.tunnel.actions.ShowTunnelSettingsAction" icon="AllIcons.General.Settings"
+                class="com.khulnasoft.plugins.tunnel.actions.ShowTunnelSettingsAction" text="Show settings"
+                description="Show Settings dialog"/>
+    </actions>
+</idea-plugin>
